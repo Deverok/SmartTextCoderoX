@@ -1,0 +1,35 @@
+schema_version: "1.0"
+# TODO(DECISION): O3 — confirm GLM model id against current Zhipu docs before MS2.
+default_provider: deepseek
+provider_by_modality:
+  text: deepseek
+  image: zhipu
+  video: deepseek
+providers:
+  deepseek:
+    base_url: "https://api.deepseek.com"
+    model: deepseek-chat
+    temperature: 0
+    max_tokens: 4096
+    timeout: 60
+    retries: 3
+    concurrency: 4
+    rate_limit: 60
+    seed: 42
+    json_mode: true
+    endpoint_kind: chat
+  zhipu:
+    base_url: "https://open.bigmodel.cn/api/paas/v4"
+    model: glm-4-flash
+    temperature: 0
+    max_tokens: 4096
+    timeout: 60
+    retries: 3
+    concurrency: 2
+    rate_limit: 30
+    seed: 42
+    json_mode: true
+    endpoint_kind: chat
+budget:
+  max_cost_cny_per_run: 50
+  currency: CNY

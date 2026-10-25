@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "format": "md",
+  "locale": "zh-CN",
+  "include_baseline_and_post": true,
+  "require_numeric_consistency": true
+}

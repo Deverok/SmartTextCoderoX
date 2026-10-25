@@ -1,0 +1,8 @@
+SmartTextCoderoX
+Copyright 2026 SmartTextCoderoX contributors
+
+This product is licensed under the Apache License, Version 2.0.
+See the LICENSE file for the full license text.
+
+Third-party notices for bundled resources (fonts, dictionaries, ffmpeg
+builds, etc.) live under lib/licenses/ when those assets are present.

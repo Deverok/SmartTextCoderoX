@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smarttextcoderox.local/schema/audit.schema.json",
+  "title": "STCX Audit Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "audit_id",
+    "run_id",
+    "unit_id",
+    "field_id",
+    "kind",
+    "before",
+    "after",
+    "method",
+    "rule_ref",
+    "operator",
+    "ts"
+  ],
+  "properties": {
+    "audit_id": { "type": "string", "pattern": "^A[0-9]+$" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "unit_id": { "type": "string", "minLength": 1 },
+    "field_id": { "type": "string", "minLength": 1 },
+    "kind": {
+      "type": "string",
+      "enum": ["review", "adjudication", "distribution"]
+    },
+    "before": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "after": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "method": {
+      "type": "string",
+      "pattern": "^([ABC][1-6])$"
+    },
+    "rule_ref": { "type": "string", "minLength": 1 },
+    "operator": { "type": "string", "minLength": 1 },
+    "ts": { "type": "string", "minLength": 1 },
+    "seed": { "type": ["integer", "null"] },
+    "note": { "type": ["string", "null"] }
+  }
+}

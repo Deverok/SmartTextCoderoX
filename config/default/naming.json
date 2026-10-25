@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "hierarchy_separator": "-",
+  "multi_value_separator": " | ",
+  "unencoded_sentinel": "<未编码>",
+  "user_visible": {
+    "stats_table_suffix": "_统计表.csv",
+    "reliability_table": "信度检验表.csv"
+  }
+}

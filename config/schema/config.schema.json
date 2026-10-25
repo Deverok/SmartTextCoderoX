@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smarttextcoderox.local/schema/config.schema.json",
+  "title": "STCX Merged Runtime Config",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "llm",
+    "reliability",
+    "distribution",
+    "words",
+    "palette",
+    "naming",
+    "pipeline",
+    "budget",
+    "offline_mode"
+  ],
+  "properties": {
+    "llm": { "type": "object" },
+    "reliability": { "type": "object" },
+    "distribution": { "type": "object" },
+    "words": { "type": "object" },
+    "palette": { "type": "object" },
+    "naming": { "type": "object" },
+    "pipeline": { "type": "object" },
+    "budget": { "type": "object" },
+    "offline_mode": { "type": "boolean" },
+    "app": { "type": "object" },
+    "report": { "type": "object" },
+    "codebook": { "type": "object" },
+    "variables": { "type": "object" }
+  }
+}

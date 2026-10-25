@@ -1,0 +1,15 @@
+---
+description: Vue 3 渲染层规范入口（按文件类型触发；正文见 rules/lang-vue.md）
+globs: **/*.vue, **/*.ts, **/*.tsx
+alwaysApply: false
+---
+
+**先读 `@rules/lang-vue.md`** —— 唯一正文；本文件只负责按 `globs` 触发。
+
+5 条硬约束：
+
+1. 只用 Vue 3 + `<script setup lang="ts">` + Composition API；禁止 Options API。
+2. 渲染进程**禁止**直接访问 `fs` / `child_process` / 密钥；只经 preload 白名单（如 `window.stcx`）。
+3. 大列表（≥ 1 万行）必须分页 / 虚拟滚动 / 服务端聚合；禁止把全量数据塞进渲染进程内存。
+4. 所有 IPC 调用必须处理四类状态（加载 / 成功 / 业务错误 / 崩溃），错误提示为"码 + 人话 + 下一步"。
+5. 配色取自 `config/default/palette.json`；中文文案集中管理，不在模板里散落长句。

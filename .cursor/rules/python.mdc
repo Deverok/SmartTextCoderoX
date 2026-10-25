@@ -1,0 +1,15 @@
+---
+description: Python 内核编码规范入口（按文件类型触发；正文见 rules/lang-python.md）
+globs: **/*.py
+alwaysApply: false
+---
+
+**先读 `@rules/lang-python.md`** —— 那是唯一正文；本文件只负责按 `globs` 触发，不重复正文。
+
+在读取正文前，先守住这 5 条硬约束：
+
+1. 包依赖方向单向：`core ← {steps, agents, analytics, viz, reporting} ← app`；**`stcx_analytics` 不得 import `stcx_agents`**。
+2. 配置化一切：路径、模型名、端点、字段名、阈值一律来自 `config/`；禁止硬编码。
+3. 公开接口必须有完整类型注解，内核包必须过 `mypy --strict`；`ruff` 零告警。
+4. 结构化数据用 Pydantic 模型 + JSON Schema；校验失败抛带错误码的异常，禁止静默默认。
+5. 随机行为必须显式种子并写入 manifest；输出排序稳定；产物内不写运行时间戳。

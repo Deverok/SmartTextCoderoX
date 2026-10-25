@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smarttextcoderox.local/schema/codes.schema.json",
+  "title": "STCX Code Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "unit_id",
+    "sample_id",
+    "field_id",
+    "coder_id",
+    "values",
+    "provenance",
+    "hierarchy_path",
+    "flags",
+    "layer"
+  ],
+  "properties": {
+    "unit_id": { "type": "string", "minLength": 1 },
+    "sample_id": { "type": "string", "minLength": 1 },
+    "field_id": { "type": "string", "minLength": 1 },
+    "coder_id": { "type": "string", "minLength": 1 },
+    "values": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "raw_values": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "confidence": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["quote", "span"],
+        "properties": {
+          "quote": { "type": "string" },
+          "span": {
+            "type": "array",
+            "items": { "type": "integer", "minimum": 0 },
+            "minItems": 2,
+            "maxItems": 2
+          }
+        }
+      }
+    },
+    "evidence_source": {
+      "type": "string",
+      "enum": ["keyword_span", "escalate_model", "none"]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_id",
+        "model",
+        "model_version",
+        "prompt_hash",
+        "codebook_hash",
+        "temperature",
+        "ts",
+        "tokens",
+        "invocation_id"
+      ],
+      "properties": {
+        "run_id": { "type": "string", "minLength": 1 },
+        "model": { "type": ["string", "null"] },
+        "model_version": { "type": ["string", "null"] },
+        "prompt_hash": { "type": ["string", "null"] },
+        "codebook_hash": { "type": "string", "minLength": 1 },
+        "temperature": { "type": ["number", "null"] },
+        "ts": { "type": "string", "minLength": 1 },
+        "tokens": { "type": ["integer", "null"], "minimum": 0 },
+        "invocation_id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "hierarchy_path": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "flags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "layer": { "type": "string", "enum": ["L0", "L1"] },
+    "revision_of": { "type": ["string", "null"] },
+    "reason": { "type": ["string", "null"] },
+    "rule_ref": { "type": ["string", "null"] },
+    "operator": { "type": ["string", "null"] },
+    "ts": { "type": ["string", "null"] }
+  }
+}

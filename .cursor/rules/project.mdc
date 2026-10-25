@@ -1,0 +1,45 @@
+---
+description: SmartTextCoderoX 项目不变量（契约优先、数据分层、红线、证据要求）。任何改动前先看这里。
+alwaysApply: true
+---
+
+# SmartTextCoderoX 项目不变量
+
+## 唯一需求来源
+
+- 需求规格说明书 **v2.4**（`docs/需求规格说明书.md`）是唯一需求来源；本规则与 `AGENTS.md`、`rules/*.md` 都是它的派生约束。
+- 规格未覆盖时：查 §15.1（已决策）→ §15.2（追加决策）→ 按 §15.4 建议默认并留 `TODO(DECISION)`；**不得自行定义需求**。
+
+## 五条不可协商的约束
+
+1. **契约优先**：先写 JSON Schema 与失败用例，再写实现。机器权威格式是 JSONL/JSON；TXT 是人工面；CSV 是交付面。
+2. **分区纪律**：静态区（`src/ config/ docs/ lib/ models/ module/ prompt/ script/ bin/`）运行时只读；运行区（`cache/ data/ logs/ reports/ results/ temp/`）按 `{version}/{run_id}` 隔离。
+3. **数据分层**：L0 原始编码只写不改；任何改动进 L1 并写审计（`reason` + `rule_ref` + `operator`）；分析口径变化进 L2。
+4. **每步可复现**：写 manifest（输入/输出哈希、配置哈希、编码规则哈希、提示词哈希、代码版本、模型与参数、统计、成本）；每个环节可单独运行。
+5. **没有证据不算完成**：每条验收要有测试名 + 命令 + 输出（对应 `ACC-*` 编号）。
+
+## 红线速查（完整见 `rules/forbidden.md`）
+
+- 不改数据来达标：禁止随机改编码值、禁止按"指标好看"调参、禁止隐藏不达标结果。
+- 不硬编码路径、模型名、端点、字段名、阈值。
+- 不绕过契约传数据：禁止内存/全局/环境变量传业务数据；禁止读未声明输入；禁止把 `temp/`、`cache/` 当输入。
+- 不静默降级/静默默认：缺字体、缺 ffmpeg、上下文超限、解析失败都必须报错或记 flag。
+- 不设计依赖本地大模型权重的默认路径（本机无 GPU，决策型只走托管 API）。
+
+## 项目坐标
+
+- 仓库/产品名：`SmartTextCoderoX`；Python 包前缀 `STCX-*`，导入名 `stcx_*`；CLI `stcx-step` / `stcx-tool`；环境变量前缀 `STCX_`。
+- 环节编号固定为 `ST01`…`ST16`（不得自创）；智能体为 `A1/A3/A4/A5/A6`。
+
+## 相关文件
+
+- `@AGENTS.md` — 仓库级规则与质量门
+- `@rules/data-contract.md` — 数据与格式契约
+- `@rules/code-structure.md` — 多包、依赖方向、命名
+- `@rules/agent-harness.md` — 智能体粒度、预算、硬规则
+- `@rules/testing-acceptance.md` — 测试与验收
+- `@rules/forbidden.md` — 红线全表
+- `@rules/collaboration.md` — 提交、PR、需求变更
+- `@rules/security-cost.md` — 密钥、隐私、成本、许可
+- `@rules/task-breakdown.md` — 任务模板与 DoD
+- `@rules/lang-python.md` / `@rules/lang-vue.md` / `@rules/lang-node.md` / `@rules/lang-electron.md` — 语言/框架规范**正文**（对应 `.mdc` 只是薄壳入口）

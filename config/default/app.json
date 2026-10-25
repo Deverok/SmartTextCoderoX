@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "app_name": "SmartTextCoderoX",
+  "locale": "zh-CN",
+  "timezone": "Asia/Shanghai",
+  "offline_mode": true,
+  "log_max_bytes_per_run": 209715200,
+  "log_sample_text_by_default": false
+}

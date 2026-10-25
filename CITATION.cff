@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=./config/schema/citation.schema.json
+cff-version: 1.2.0
+message: If you use this software, please cite it as below.
+title: SmartTextCoderoX
+version: 0.0.0
+date-released: "2026-10-25"
+license: Apache-2.0
+repository-code: https://github.com/Deverok/SmartTextCoderoX
+type: software
+authors:
+  - name: SmartTextCoderoX contributors
+abstract: >
+  Offline-first text content analysis pipeline producing coded datasets,
+  reliability evidence, statistics, figures, and academic reports.

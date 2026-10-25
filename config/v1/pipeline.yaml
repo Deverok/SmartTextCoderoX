@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=../schema/pipeline.schema.json
+schema_version: "1.0"
+name: v1
+nodes:
+  - id: ST01
+    step: codebook_parse

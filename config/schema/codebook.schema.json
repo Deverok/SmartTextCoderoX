@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smarttextcoderox.local/schema/codebook.schema.json",
+  "title": "STCX Codebook",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["meta", "hierarchy", "categories"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "codebook_version",
+        "title",
+        "locale",
+        "created_at",
+        "source_file",
+        "source_sha256",
+        "codebook_hash",
+        "asterisk_semantics"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "minLength": 1 },
+        "codebook_version": { "type": "string", "minLength": 1 },
+        "title": { "type": "string" },
+        "locale": { "type": "string", "minLength": 2 },
+        "created_at": { "type": "string", "minLength": 1 },
+        "source_file": { "type": "string" },
+        "source_sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+        "codebook_hash": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+        "asterisk_semantics": {
+          "type": "string",
+          "enum": ["question_required", "option_default"]
+        }
+      }
+    },
+    "hierarchy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dimensions"],
+      "properties": {
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["dimension_id", "label", "order_index", "groups"],
+            "properties": {
+              "dimension_id": { "type": "string", "minLength": 1 },
+              "label": { "type": "string", "minLength": 1 },
+              "order_index": { "type": "integer", "minimum": 0 },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["group_id", "label", "order_index"],
+                  "properties": {
+                    "group_id": { "type": "string", "minLength": 1 },
+                    "label": { "type": "string", "minLength": 1 },
+                    "order_index": { "type": "integer", "minimum": 0 }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "field_id",
+          "label",
+          "dimension_id",
+          "group_id",
+          "hierarchy_path",
+          "type",
+          "required",
+          "ai_coded",
+          "order_index",
+          "options"
+        ],
+        "properties": {
+          "field_id": { "type": "string", "minLength": 1 },
+          "label": { "type": "string", "minLength": 1 },
+          "dimension_id": { "type": "string", "minLength": 1 },
+          "group_id": { "type": "string", "minLength": 1 },
+          "hierarchy_path": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "single_choice",
+              "multiple_choice",
+              "dropdown_single",
+              "dropdown_multiple"
+            ]
+          },
+          "required": { "type": "boolean" },
+          "required_marker_option": { "type": ["string", "null"] },
+          "ai_coded": { "type": "boolean" },
+          "prompt": { "type": ["string", "null"] },
+          "min_selections": { "type": ["integer", "null"], "minimum": 0 },
+          "max_selections": { "type": ["integer", "null"], "minimum": 0 },
+          "show_if": { "type": ["object", "null"] },
+          "order_index": { "type": "integer", "minimum": 0 },
+          "options": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["value_id", "value", "order_index"],
+              "properties": {
+                "value_id": { "type": "string", "minLength": 1 },
+                "value": { "type": "string", "minLength": 1 },
+                "hint": { "type": ["string", "null"] },
+                "example": { "type": ["string", "null"] },
+                "keywords": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "default": []
+                },
+                "keyword_expr": { "type": ["string", "null"] },
+                "is_other": { "type": "boolean", "default": false },
+                "is_exclusive": { "type": "boolean", "default": false },
+                "order_index": { "type": "integer", "minimum": 0 }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

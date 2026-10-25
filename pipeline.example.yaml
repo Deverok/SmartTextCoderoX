@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=./config/schema/pipeline.schema.json
+# Example pipeline DAG for a workspace (copy to config/{version}/pipeline.yaml).
+# Nodes are ST01–ST16; edges declare file-contract dependencies only.
+schema_version: "1.0"
+name: example_offline
+nodes:
+  - id: ST01
+    step: codebook_parse
+  - id: ST03
+    step: clean
+    needs: [ST01]
+  - id: ST06
+    step: code_keyword
+    needs: [ST03]
+  - id: ST12
+    step: stats
+    needs: [ST06]
+  - id: ST15
+    step: report
+    needs: [ST12]

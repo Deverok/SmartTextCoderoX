@@ -1,0 +1,15 @@
+---
+description: Node 与前端工具链规范入口（按文件类型触发；正文见 rules/lang-node.md）
+globs: package.json, **/*.mjs, **/*.cjs, **/*.ts, **/script/**, **/scripts/**
+alwaysApply: false
+---
+
+**先读 `@rules/lang-node.md`** —— 唯一正文；本文件只负责按 `globs` 触发。
+
+5 条硬约束：
+
+1. Node ≥ 20，只用 **pnpm**；`pnpm-lock.yaml` 必须提交，禁止混用 npm/yarn。
+2. ESM 优先；依赖最小化，新增依赖须说明用途、体积、许可证（禁止 AGPL 进主链路）。
+3. 子进程调用 sidecar：数组参数 + **NDJSON/JSON-RPC**；必须处理启动失败、协议版本不匹配、超时、非零退出与子进程清理。
+4. 打包资源用 `extraResources` + `process.resourcesPath`；**禁止**相对路径；随包资源必须显式声明。
+5. TypeScript `strict: true`；`console.log` 不得留在产物代码；提交前 `pnpm lint && typecheck && test` 全绿。

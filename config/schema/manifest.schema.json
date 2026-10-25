@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smarttextcoderox.local/schema/manifest.schema.json",
+  "title": "STCX Step Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "step",
+    "run_id",
+    "started_at",
+    "finished_at",
+    "inputs",
+    "outputs",
+    "config_hash",
+    "prompt_hash",
+    "codebook_hash",
+    "code_version",
+    "engine",
+    "model",
+    "model_version",
+    "temperature",
+    "seed",
+    "stats",
+    "cost",
+    "resumable",
+    "notes"
+  ],
+  "properties": {
+    "step": { "type": "string", "minLength": 1 },
+    "run_id": { "type": "string", "minLength": 1 },
+    "started_at": { "type": "string", "minLength": 1 },
+    "finished_at": { "type": "string", "minLength": 1 },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" }
+        }
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" }
+        }
+      }
+    },
+    "config_hash": { "type": "string", "minLength": 1 },
+    "prompt_hash": { "type": ["string", "null"] },
+    "codebook_hash": { "type": ["string", "null"] },
+    "code_version": { "type": "string", "minLength": 1 },
+    "engine": { "type": "string" },
+    "model": { "type": ["string", "null"] },
+    "model_version": { "type": ["string", "null"] },
+    "temperature": { "type": ["number", "null"] },
+    "seed": { "type": ["integer", "null"] },
+    "stats": { "type": "object" },
+    "cost": {
+      "type": "object",
+      "required": ["currency", "amount"],
+      "properties": {
+        "currency": { "type": "string" },
+        "amount": { "type": "number" },
+        "estimated": { "type": "boolean" }
+      }
+    },
+    "resumable": { "type": "boolean" },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

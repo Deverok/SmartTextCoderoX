@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Cross-platform entry: prefer uv/python runner.
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+exec python "$ROOT/script/maintenance/verify_workspace.py" "$@"

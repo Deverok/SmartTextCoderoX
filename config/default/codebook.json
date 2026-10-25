@@ -1,0 +1,6 @@
+{
+  "schema_version": "1.0",
+  "asterisk_semantics": "question_required",
+  "auto_detect_is_other_labels": true,
+  "is_other_labels": ["其他", "其它", "未标示", "无", "不适用", "unknown", "NA"]
+}

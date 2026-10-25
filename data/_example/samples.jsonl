@@ -1,0 +1,2 @@
+{"sample_id": "S0001", "metadata": {"来源": "合成平台A", "账号类型": "专业账号"}, "text": "大家好，我是整形外科医生。今天聊聊医美安全与效果，价格方面也简单说明。", "source": {"type": "text", "file": "S0001.txt", "sha256": "d95242a0fad3a45ec1f8be2005abef42dffcbbc4bd5be1a03cb1b38cada4e0c8"}, "flags": []}
+{"sample_id": "S0002", "metadata": {"来源": "合成平台B", "账号类型": "媒体账号"}, "text": "本报记者调查发现，部分机构宣传存在夸大效果的问题。", "source": {"type": "text", "file": "S0002.txt", "sha256": "638b1c7c7029c912660960908c0ad72ba44f0444178eba5827895f6e9ad0d415"}, "flags": []}

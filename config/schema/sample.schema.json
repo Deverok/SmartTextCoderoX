@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smarttextcoderox.local/schema/sample.schema.json",
+  "title": "STCX Sample",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["sample_id", "metadata", "text", "source", "flags"],
+  "properties": {
+    "sample_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*[0-9]+$"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "text": { "type": "string" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "file", "sha256"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["text", "docx", "xlsx", "csv", "image", "audio", "video"]
+        },
+        "file": { "type": "string", "minLength": 1 },
+        "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+        "media_path": { "type": ["string", "null"] },
+        "duration": { "type": ["number", "null"], "minimum": 0 },
+        "segments": {
+          "type": "array",
+          "items": { "type": "object" }
+        }
+      }
+    },
+    "flags": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

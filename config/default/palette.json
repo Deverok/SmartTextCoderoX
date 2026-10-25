@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "active": "bright_friendly",
+  "schemes": {
+    "bright_friendly": {
+      "colors": ["#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E", "#E6AB02"]
+    },
+    "print_safe": {
+      "colors": ["#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2"]
+    },
+    "high_contrast": {
+      "colors": ["#000000", "#FFFFFF", "#FF0000", "#00FF00", "#0000FF", "#FFFF00"]
+    }
+  }
+}

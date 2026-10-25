@@ -1,0 +1,55 @@
+---
+description: Git 工作流规范（分支命名、Conventional Commits、提交粒度、证据要求在 PR、禁止提交的内容）
+alwaysApply: true
+---
+
+# Git 工作流规范
+
+## 分支
+
+- `main` 保持可发布；**禁止**直接推送 `main`。
+- 命名：`feat/<ms>-<slug>`（如 `feat/ms0-contracts`）、`fix/<slug>`、`docs/<slug>`、`chore/<slug>`、`test/<slug>`。
+- 一个分支只做一件事；合并前先 rebase 到最新 `main` 并跑全量质量门。
+
+## 提交信息（Conventional Commits）
+
+```
+<type>(<scope>): <what> — <why>
+
+<可选：影响范围、迁移说明、ACC 编号>
+```
+
+- `type` ∈ `feat` / `fix` / `docs` / `test` / `refactor` / `chore` / `perf`。
+- `scope` 用包或模块名：`contracts` / `core` / `steps` / `agents` / `analytics` / `viz` / `reporting` / `app` / `gui` / `schema` / `prompt`。
+- 示例：`feat(codebook): 实现 CB-* 全码校验 — ACC-M1-04`
+- **一次提交只做一件事**；契约（Schema）变更与实现变更必须分开提交。
+
+## 禁止提交
+
+- `.env`、任何密钥、token、cookie；
+- `runs/`、运行产物（`results/`、`reports/`、`logs/`、`cache/`、`temp/`）；
+- `data/` 下除 `data/_example/` 以外的任何内容（真实研究数据）；
+- `models/` 大文件（走下载清单）、`bin/` 构建产物；
+- 大体积二进制、`node_modules/`、`dist/`。
+
+`.gitignore` 至少包含：`.env`、`*.log`、`runs/`、`cache/`、`temp/`、`logs/`、`results/`、`reports/`、`models/*`、`bin/*`、`node_modules/`、`dist/`、`.venv/`、`__pycache__/`、`.pytest_cache/`、`.mypy_cache/`、`.ruff_cache/`。
+
+## 提交前自检
+
+- [ ] `uv run ruff check . && uv run mypy src && uv run pytest` 全绿
+- [ ] 离线集成测试通过（断网 + cassette）
+- [ ] 未提交敏感信息/运行产物（`git status` 逐项确认）
+- [ ] `CHANGELOG.md` 已更新（Keep a Changelog 格式）
+- [ ] 涉及契约：`schema_version` 已递增 + 迁移脚本 + 文档
+
+## PR
+
+- 标题与提交信息同格式；描述必须包含：变更说明、影响范围、**验收证据**（命令 + 测试名 + 结果）、迁移与回滚方式。
+- **没有证据不合并**；评审清单见 `rules/collaboration.md` §4。
+- 合并策略：squash merge（保持 `main` 历史线性）；合并后删除分支。
+
+## 版本与发布
+
+- 语义化版本；tag 格式 `v<major>.<minor>.<patch>`。
+- 发版前：全量测试 + 断网复现演练 + 三平台安装包冒烟；`CHANGELOG` 与 `docs/dev/progress/` 更新。
+- 禁止 force push 共享分支；禁止修改已发布的 tag。

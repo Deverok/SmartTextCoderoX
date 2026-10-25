@@ -1,0 +1,13 @@
+# STCX-TXT: codebook@1.0
+# Placeholder; replaced by make_fixture / ACC-M1 fixtures.
+
+@维度: 示例维度
+@组别: 示例组别
+
+()示例单选题/#这是一道单选题#/
+<isRequired>
+医生*/#选项#/
+  <关键词=医生 OR 医师 OR 专家>
+  <提示词=医疗专业人员>
+其他/#选项#/
+  <isOther>

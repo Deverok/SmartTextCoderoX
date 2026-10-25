@@ -1,0 +1,5 @@
+{
+  "schema_version": "1.0",
+  "min_share": 0.05,
+  "max_audit_ratio": 0.3
+}

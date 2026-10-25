@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "policy": "ALL",
+  "threshold": 0.9,
+  "bootstrap_n": 1000,
+  "seed": 42,
+  "min_overlap": 50,
+  "min_overlap_ratio": 0.1
+}

@@ -1,0 +1,12 @@
+{
+  "yaml.schemaStore.enable": false,
+  "yaml.schemas": {
+    "./config/schema/pipeline.schema.json": [
+      "pipeline.example.yaml",
+      "config/*/pipeline.yaml"
+    ],
+    "./config/schema/citation.schema.json": [
+      "CITATION.cff"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+target-version = "py310"
+line-length = 100
+src = ["src", "tests", "script"]
+
+[lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[lint.per-file-ignores]
+"tests/**" = ["B011", "E501"]
+"src/stcx_contracts/stcx_contracts/errors.py" = ["E501"]
+"src/stcx_steps/stcx_steps/codebook.py" = ["E501"]

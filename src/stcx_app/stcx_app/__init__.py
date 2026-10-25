@@ -1,0 +1,3 @@
+"""STCX-app: CLI entrypoints."""
+
+__version__ = "0.0.0"

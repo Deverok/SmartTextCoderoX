@@ -1,0 +1,15 @@
+---
+description: Electron 主进程/预加载规范入口（按文件类型触发；正文见 rules/lang-electron.md）
+globs: **/main/**, **/preload/**, **/*.main.ts, electron-builder.yml, electron-builder.json
+alwaysApply: false
+---
+
+**先读 `@rules/lang-electron.md`** —— 唯一正文；本文件只负责按 `globs` 触发。
+
+5 条硬约束：
+
+1. 窗口必须 `contextIsolation: true`、`nodeIntegration: false`、`sandbox: true`；禁止关闭隔离。
+2. 渲染进程只经 preload 白名单访问系统能力；preload 只做转发 + 参数校验，不含业务逻辑。
+3. IPC 通道名必须是常量（`shared/channels.ts`）；每通道须 Schema 校验、超时、错误映射 `{code, message, hint}`。
+4. 密钥只用 Electron `safeStorage` 或 `.env`；禁止写入配置、日志、manifest。
+5. sidecar 生命周期：解析 `resourcesPath` → 握手校验协议版本 → 首次自检（字体/ffmpeg/model）；退出时 kill 子进程。
